@@ -1,14 +1,14 @@
 import { createBrowserRouter } from "react-router-dom";
 
+import Pomodoro from "./pages/pomodoro";
 import Profile from "./pages/profile";
-import Timer from "./pages/timer";
 import Tasks from "./pages/tasks";
 
 
 export const router = createBrowserRouter([
     {
         path: "/",
-        element: <Timer />,
+        element: <Pomodoro />,
     },
     {
         path: "/tasks",

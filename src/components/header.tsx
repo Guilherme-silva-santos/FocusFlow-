@@ -5,7 +5,7 @@ import { NavLink } from './navLink';
 
 export const Header = () => {
     return (
-        <div className="border-b border-gray-700">
+        <header className="border-b border-gray-700">
             <div className='h-16 flex items-center gap-6 px-6 bg'>
                 <Clock10 className="w-6 h-6" color='#94a3b8' />
                 <div className="border-l-2 border-gray-700 h-10"/>
@@ -23,6 +23,6 @@ export const Header = () => {
                     </NavLink>
                 </div>
             </div>
-        </div>
+        </header>
     )
 }
