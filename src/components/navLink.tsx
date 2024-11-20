@@ -12,7 +12,7 @@ export function NavLink(props: NavLinkProps) {
     <Link
       className={`flex items-center gap-1.5 text-sm font-medium transition-opacity duration-200 
         ${isActive ? 'text-slate-700 font-bold opacity-100' : 'text-slate-500 opacity-50 hover:opacity-75 hover:text-slate-700'}`}
-      {...props}
+      {...props}  
     />
   );
 }

@@ -1,4 +1,4 @@
-import { Github, Languages, Rocket, SunMoon } from 'lucide-react';
+import { Languages, Rocket, SunMoon } from 'lucide-react';
 
 import { CardTimer } from '../components/cardTimer';
 import Checkbox from '../components/checkbox';
@@ -17,7 +17,6 @@ export default function Pomodoro() {
         </div>
         <div className="flex items-center gap-4">
           <Button icon={<SunMoon />} onClick={() => alert('click')} />
-          <Button icon={<Github />} onClick={() => alert('click')} />
           <Button icon={<Languages />} onClick={() => alert('click')} />
         </div>
       </div>
