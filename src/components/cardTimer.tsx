@@ -1,17 +1,19 @@
-import { Play, Pause, RefreshCcw } from "lucide-react";
+import { Play, Pause, RefreshCcw, Edit } from "lucide-react";
 import { useEffect, useState } from "react";
 
 import { Button } from "./button";
+import { Modal } from "./modal";
 
 
 export const CardTimer = () => {
     const [time, setTime] = useState(50 * 60)
     const [isRunning, setIsRunning] = useState(false)
+    const [modalOpen, setModalOpen] = useState(false)
 
     const handleSetTime = (newTime: number) => {
         setTime(newTime);
         setIsRunning(false);
-      };
+    };
 
     useEffect(() => {
         let interval: number | undefined
@@ -38,28 +40,25 @@ export const CardTimer = () => {
             <div className="flex gap-10 mb-10">
                 <Button
                     onClick={() => {
-                        handleSetTime(25 * 60)
+                        handleSetTime(50 * 60)
                         setIsRunning(false)
                     }}
                     variant={'secondary'}
                     label={'Pomodoro'} />
                 <Button
                     onClick={() => {
-                        handleSetTime(10 * 60)
+                        handleSetTime(25 * 60)
                         setIsRunning(false)
                     }}
                     variant={'secondary'}
                     label={'Long Break'} />
                 <Button
                     onClick={() => {
-                        handleSetTime(25 * 60)
+                        handleSetTime(10 * 60)
                         setIsRunning(false)
                     }}
                     variant={'secondary'}
                     label={'Short Break'} />
-                <Button
-                    variant={'secondary'}
-                    label={'Custimize Timer'} />
             </div>
             <h1 className="text-6xl font-bold text-slate-300">
                 {String(Math.floor(time / 60)).padStart(2, '0')}:
@@ -67,8 +66,12 @@ export const CardTimer = () => {
             </h1>
             <div className="flex items-center gap-4">
                 <Button icon={<Play />} onClick={() => setIsRunning(true)} />
-                <Button icon={< RefreshCcw />} onClick={() => {setIsRunning(false); setTime(50 * 60)}} />
+                <Button icon={< RefreshCcw />} onClick={() => { setIsRunning(false); setTime(50 * 60) }} />
                 <Button icon={<Pause />} onClick={() => setIsRunning(false)} />
+                <Button icon={<Edit />} onClick={() => setModalOpen(true)} />
+                <Modal isOpen={modalOpen} onClose={() => setModalOpen(false)} >
+                    <input type="text" />
+                </Modal>
             </div>
         </div>
     );
