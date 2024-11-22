@@ -6,10 +6,10 @@ import { NavLink } from './navLink';
 export const Header = () => {
     return (
         <header className="border-b border-gray-700">
-            <div className='h-16 flex items-center gap-6 px-6 bg'>
+            <div className='h-16 flex items-center justify-between px-4 sm:px-6 lg:px-8'>
                 <Clock10 className="w-6 h-6" color='#94a3b8' />
                 <div className="border-l-2 border-gray-700 h-10"/>
-                <nav className='flex items-center space-x-4 lg:space-x-6'>
+                <nav className='flex items-center space-x-4 lg:space-x-6 flex-1'>
                     <NavLink to={'/'}>
                         <p className='text-sm font-bold text-slate-400'>Pomodoro</p>
                     </NavLink>
@@ -17,7 +17,7 @@ export const Header = () => {
                         <p className='text-sm font-bold text-slate-400'>Tarefas</p>
                     </NavLink>
                 </nav>
-                <div className='ml-auto flex items-center gap-4'>
+                <div className='flex items-center gap-4'>
                     <NavLink to='/profile'>
                         <User2Icon className="w-6 h-6" color='#94a3b8'  />
                     </NavLink>

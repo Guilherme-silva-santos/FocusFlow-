@@ -11,30 +11,33 @@ export const CardTimer = () => {
     const [isRunning, setIsRunning] = useState(false)
     const [modalOpen, setModalOpen] = useState(false)
 
-    const handleSetTime = (time: number) => {
-        const minutes = Math.floor(time * 60)
-        setTime(minutes)
-    }
+    const handleSetTime = (timeInMinutes: number) => {
+        const seconds = timeInMinutes * 60;
+        setTime(seconds);
+    };
+
 
     useEffect(() => {
-        let interval: number | undefined
-        const start = Date.now()
-        const end = start + time * 1000
+        const minutes = String(Math.floor(time / 60)).padStart(2, '0');
+        const seconds = String(time % 60).padStart(2, '0');
+        document.title = isRunning ? `${minutes}:${seconds} - Running` : "FocusFlow";
+        if (time === 0 ){
+            alert("Tempo esgotado...")
+        }
+    }, [isRunning, time]);
+
+    useEffect(() => {
+        let interval: number | undefined;
 
         if (isRunning) {
             interval = setInterval(() => {
-                const now = Date.now()
-                const remainingTime = Math.max(Math.round((end - now) / 1000), 0)
-                setTime(remainingTime)
-
-                if (remainingTime <= 0) {
-                    clearInterval(interval)
-                }
-            }, 1000)
+                setTime((prevTime) => Math.max(prevTime - 1, 0));
+            }, 1000);
         }
 
-        return () => clearInterval(interval)
-    }, [isRunning, time]);
+        return () => clearInterval(interval);
+    }, [isRunning]);
+
 
     //console.log(time);
 
@@ -64,6 +67,14 @@ export const CardTimer = () => {
                     label={'Short Break'} />
             </div>
             <h1 className="text-6xl font-bold text-slate-300">
+                {/* Transforma o numero para string, para que possamos usar o padStart 
+                    e depois utiliza o meth flor para que o numero seja arredondado
+                    sem casa decimais, o ped start garante que a string tenha pelo menos 2 caracteres
+                    e se ela for menor que dois adiciona o 0 a esquerda
+                    O resto da divisão (time % 60) representa os segundos restantes para completar o minuto atual.
+                    Por exemplo:
+                    Em 2:35 (2 minutos e 35 segundos), o resto da divisão (35) é justamente o número de segundos restantes no minuto atual.
+                */}
                 {String(Math.floor(time / 60)).padStart(2, '0')}:
                 {String(time % 60).padStart(2, '0')}
             </h1>
