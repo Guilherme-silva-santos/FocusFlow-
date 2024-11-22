@@ -4,7 +4,11 @@ export default {
     "./src/**/*.{js,jsx,ts,tsx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        customDark: '#020617', // Nome da sua cor personalizada
+      },
+    },
   },
   plugins: [],
 }

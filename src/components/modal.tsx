@@ -1,17 +1,15 @@
-import { Button } from "./button";
-
-
 interface ModalProps {
     children: React.ReactNode;
-    onClose?: () => void;
     isOpen?: boolean;
+    title?: string;
 }
-export const Modal: React.FC<ModalProps> = ({ children, onClose, isOpen }) => {
-    if(!isOpen) return null;
+export const Modal: React.FC<ModalProps> = ({ children, isOpen, title }) => {
+    if (!isOpen) return null;
     return (
-        <div className="fixed flex flex-col rounded-md ml-6 mb-10 items-center w-[200px] h-[150px] bg-slate-500 z-50"> 
+        <div className="fixed flex flex-col justify-center p-4 rounded-md w-[300px] h-[200px] bg-slate-800  z-50">
+            <h2 className="text-lg font-bold text-slate-500">{title}</h2>
             {children}
-            <Button onClick={onClose}>Close</Button>
         </div>
+
     )
 }
