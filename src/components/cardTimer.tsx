@@ -1,6 +1,8 @@
 import { Play, Pause, RefreshCcw, Edit } from "lucide-react";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
+import { Howl } from 'howler';
 
+import audioFile from '../audio/audio.mp3';
 import { Button } from "./button";
 import { Modal } from "./modal";
 import { Input } from "./input";
@@ -16,15 +18,27 @@ export const CardTimer = () => {
         setTime(seconds);
     };
 
-
+    const timerSound = useMemo(() => {
+        const sound = new Howl({
+            src: [audioFile],
+            volume: 0.5,
+            loop: false,
+        });
+        return sound;
+    }, [])
+    
     useEffect(() => {
+        // divide o tempo por 60 para obter o número de minutos
         const minutes = String(Math.floor(time / 60)).padStart(2, '0');
+        // e o resto da divisão por 60 para obter o número de segundos
         const seconds = String(time % 60).padStart(2, '0');
         document.title = isRunning ? `${minutes}:${seconds} - Running` : "FocusFlow";
         if (time === 0 ){
-            alert("Tempo esgotado...")
+            timerSound.play();
+            setIsRunning(false);
+
         }
-    }, [isRunning, time]);
+    }, [isRunning, time, timerSound]);
 
     useEffect(() => {
         let interval: number | undefined;
