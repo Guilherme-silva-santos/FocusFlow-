@@ -4,12 +4,14 @@ interface InputProps{
     type: string;
     value?: string;
     onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+    required?: boolean;
 }
 
-export const Input: React.FC<InputProps> = ({ placeholder, type, value, onChange }) => {
+export const Input: React.FC<InputProps> = ({ placeholder, type, value, onChange, required }) => {
     return (
         <div className="flex flex-col gap-1">
             <input
+                required={required}
                 type={type}
                 placeholder={placeholder}
                 value={value}
